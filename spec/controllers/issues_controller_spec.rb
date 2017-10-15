@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe IssuesController, type: :controller do
 
   shared_examples 'status_is_ok' do
-    it { expect(subject.status).to eq 200 }
+    it { expect(subject).to have_http_status :ok }
+  end
+
+  shared_examples 'status_is_ng' do
+    it { expect(subject).to have_http_status :bad_request }
   end
 
   describe "#index" do
@@ -24,7 +28,7 @@ RSpec.describe IssuesController, type: :controller do
     context 'タイトルの必須NG' do
       let(:issue_attrs) {  FactoryGirl.attributes_for(:issue).keep_if { |k, v| k =~ /body|status/ } }
       subject { put :create, params: issue_attrs }
-      it_behaves_like 'status_is_ok'
+      it_behaves_like 'status_is_ng'
       it { expect(JSON.parse(subject.body)['status']).to eq 'ng' }
       it { expect(JSON.parse(subject.body)['error_code']).to eq 400 }
       it { expect(JSON.parse(subject.body)['message']['title']).to eq ["can't be blank"]}
