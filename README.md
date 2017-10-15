@@ -22,3 +22,7 @@ KPT用のApplicaitonを作成するためのWebAPI
 - https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
 - https://qiita.com/_daisuke/items/13996621cf51f835494b
 - http://www.rubydoc.info/gems/factory_girl/file/GETTING_STARTED.md
+
+## カバレッジ
+
+[![Coverage Status](https://coveralls.io/repos/github/sitateru/kpt/badge.svg?branch=add-coverall-add-coverage)](https://coveralls.io/github/sitateru/kpt?branch=add-coverall-add-coverage)
