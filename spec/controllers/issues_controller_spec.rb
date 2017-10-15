@@ -26,6 +26,8 @@ RSpec.describe IssuesController, type: :controller do
       subject { put :create, params: issue_attrs }
       it_behaves_like 'status_is_ok'
       it { expect(JSON.parse(subject.body)['status']).to eq 'ng' }
+      it { expect(JSON.parse(subject.body)['error_code']).to eq 400 }
+      it { expect(JSON.parse(subject.body)['message']['title']).to eq ["can't be blank"]}
     end
   end
 end
