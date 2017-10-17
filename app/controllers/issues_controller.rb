@@ -13,6 +13,15 @@ class IssuesController < ApplicationController
     end
   end
 
+  def update
+    issue = Issue.find(params[:id])
+    if issue.update_attributes(issue_params)
+      render_ok(issue)
+    else
+      render_ng(400, issue.errors)
+    end
+  end
+
   def destroy
     Issue.find(params[:id]).destroy
     render_ok(issue)
