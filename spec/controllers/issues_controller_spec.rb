@@ -34,19 +34,4 @@ RSpec.describe IssuesController, type: :controller do
       it { expect(JSON.parse(subject.body)['message']['title']).to eq ["can't be blank"]}
     end
   end
-
-  describe "#update" do
-    let(:issue_attrs) {FactoryGirl.create(:issue)}
-    let(:issue_update_attrs) {FactoryGirl.attributes_for(:issue_update)}
-    subject { patch :update, params: { id: issue_attrs, issue: issue_update_attrs }}
-    it { expect(subject.status).to eq 200 }
-    it { expect(JSON.parse(subject.body)['payload']['body']).to eq issue_update_attrs[:body] }
-  end
-
-  describe "#destroy" do
-    let(:issue_attrs) {FactoryGirl.create(:issue)}
-    let(:issue) {delete :destroy, params: {id: issue_attrs}}
-    subject {get :index}
-    it {expect(JSON.parse(subject.body)['payload'].map {|d| d['id']}).not_to include issue_attrs[:id]}
-  end
 end
