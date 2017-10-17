@@ -13,9 +13,14 @@ class IssuesController < ApplicationController
     end
   end
 
+  def destroy
+    Issue.find(params[:id]).destroy
+    render_ok(issue)
+  end
+
   private
 
   def issue_params
-    params.permit(:title, :body, :status)
+    params.require(:issue).permit(:title, :body, :status)
   end
 end

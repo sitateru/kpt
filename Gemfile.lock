@@ -86,6 +86,8 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
+    paranoia (2.3.1)
+      activerecord (>= 4.0, < 5.2)
     pg (0.21.0)
     puma (3.10.0)
     rack (2.0.3)
@@ -179,6 +181,7 @@ DEPENDENCIES
   coveralls
   factory_girl_rails (~> 4.0)
   listen (>= 3.0.5, < 3.2)
+  paranoia (~> 2.2)
   pg
   puma (~> 3.7)
   rails (~> 5.1.4)
