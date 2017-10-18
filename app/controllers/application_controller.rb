@@ -10,6 +10,6 @@ class ApplicationController < ActionController::API
   end
 
   def render_ng(code, message)
-    render json: {status: 'ng', error_code: code, message: message}, :status => :bad_request
+    render json: {status: 'ng', error_code: code, message: message}, :status => code
   end
 end
