@@ -20,14 +20,14 @@ RSpec.describe IssuesController, type: :controller do
   describe "#create" do
     context '正常登録' do
       let(:issue_attrs) {  FactoryGirl.attributes_for(:issue).keep_if { |k, v| k =~ /body|title|status/ } }
-      subject { put :create, params: issue_attrs }
+      subject { put :create, params: { issue: issue_attrs }}
       it_behaves_like 'status_is_ok'
       it { expect(JSON.parse(subject.body)['payload']['body']).to eq issue_attrs[:body] }
     end
 
     context 'タイトルの必須NG' do
       let(:issue_attrs) {  FactoryGirl.attributes_for(:issue).keep_if { |k, v| k =~ /body|status/ } }
-      subject { put :create, params: issue_attrs }
+      subject { put :create, params: { issue: issue_attrs }}
       it_behaves_like 'status_is_bad_request'
       it { expect(JSON.parse(subject.body)['status']).to eq 'ng' }
       it { expect(JSON.parse(subject.body)['error_code']).to eq 400 }
