@@ -23,7 +23,8 @@ class IssuesController < ApplicationController
   end
 
   def destroy
-    Issue.find(params[:id]).destroy
+    issue = Issue.find(params[:id])
+    issue.destroy
     render_ok(issue)
   end
 
