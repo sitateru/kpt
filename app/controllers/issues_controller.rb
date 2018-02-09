@@ -1,5 +1,4 @@
 class IssuesController < ApplicationController
-
   def index
     render_ok(Issue.all)
   end
@@ -9,7 +8,7 @@ class IssuesController < ApplicationController
     if issue.save
       render_ok(issue)
     else
-      render_ng(400, issue.errors) 
+      render_ng(400, issue.errors)
     end
   end
 

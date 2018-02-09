@@ -1,0 +1,44 @@
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'lib/**/*'
+    - 'config/**/*'
+    - 'vendor/bundle/**/*'
+    - Rakefile
+    - Gemfile
+Rails:
+  Enabled: true
+Rails/InverseOf:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - staging
+    - test
+Style/SymbolArray:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/ClassAndModuleChildren: 
+  Enabled: false
+Documentation:
+  Enabled: false
+Style/GlobalVars:
+  Enabled: false
+LineLength:
+  Max: 150
+  Exclude:
+    - "spec/**/*.rb"
+Metrics/BlockLength:
+  Enabled: false
+Metrics/MethodLength:
+  Max: 15
+Metrics/ClassLength:
+  Max: 150 # default: 100
+  Exclude:
+    - "spec/**/*.rb"
