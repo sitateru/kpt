@@ -46,6 +46,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :test do
-  gem 'simplecov', :require => false
+  gem 'simplecov', '~> 0.14.1', :require => false
   gem 'coveralls', :require => false
 end
