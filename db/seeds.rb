@@ -10,5 +10,5 @@ Issue.create(title: 'みんなの進捗がリモートのためみえにく', bo
 Issue.create(title: '朝会をする', body: '朝会にて機能の進捗を確認', status: :keep)
 Issue.create(title: 'ディスプレイをつかってみる', body: 'ディスプレイにて作業効率が上がるか確かめる', status: :try)
 
-User.create(name: '山田太郎', email: 'tyamada@example.com')
-User.create(name: '鈴木花子', email: 'hsuzuki@example.com')
+User.create(name: 'tyamada', email: 'tyamada@example.com')
+User.create(name: 'hsuzuki', email: 'hsuzuki@example.com')
