@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.index :deleted_at
 
       #nameに一意制約を付加,部分index対応のDB(pg)でのみ動作
-      t.index :name, unique: true, where: "deleted_at IS NOT NULL"
+      t.index :name, unique: true, where: "deleted_at IS NULL"
     end
   end
 end
