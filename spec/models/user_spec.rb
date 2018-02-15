@@ -13,8 +13,8 @@ RSpec.describe User, type: :model do
     end
     context "when not unique" do
       before do
-        @del = create(:user, name: "dupuser").destroy
-        @dup = create(:user, name: "dupuser")
+        create(:user, name: "dupuser").destroy
+        create(:user, name: "dupuser")
         @user = build(:user, name: "dupuser")
       end
       it do
