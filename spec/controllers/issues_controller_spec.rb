@@ -10,10 +10,26 @@ RSpec.describe IssuesController, type: :controller do
   end
 
   describe "#index" do
-    let!(:issue) { create :issue }
-    subject { get :index }
-    it_behaves_like 'status_is_ok'
-    it { expect(JSON.parse(subject.body)['payload'].map { |d| d['id'] }).to include issue.id }
+    context "default" do
+      let!(:issue) { create :issue }
+      subject { get :index }
+      it_behaves_like 'status_is_ok'
+      it { expect(JSON.parse(subject.body)['payload'].map { |d| d['id'] }).to include issue.id }
+    end
+    context "filter by status" do
+      let!(:issues_searched) { create_list :issue, 10, title: "the string to be searched", status: :keep }
+      subject { get :index, params: { q: { status_eq: "keep", title_cont: "to be searched" } } }
+      it_behaves_like 'status_is_ok'
+      it { expect(JSON.parse(subject.body)["payload"].count).to be >= 10 }
+      it { expect(JSON.parse(subject.body)["payload"].map { |d| d["status"] }).to all(eq "keep") }
+      it { expect(JSON.parse(subject.body)["payload"].map { |d| d["title"] }).to all(include "to be searched") }
+    end
+    context "order by updated time" do
+      let!(:issue_latest) { create_list(:issue, 10).last }
+      subject { get :index, params: { q: { s: ["updated_at desc"] } } }
+      it_behaves_like 'status_is_ok'
+      it { expect(JSON.parse(subject.body)["payload"].first["id"]).to eq issue_latest.id }
+    end
   end
 
   describe "#create" do
