@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
         expect(@user).to_not be_valid
         expect(@user.errors[:name]).to_not be_empty
       end
-      it { expect{ @user.save!(validate: false) }.to raise_error ActiveRecord::RecordNotUnique }
+      it { expect { @user.save!(validate: false) }.to raise_error ActiveRecord::RecordNotUnique }
     end
     context "when blank" do
       let(:user) { build(:user, name: '') }
