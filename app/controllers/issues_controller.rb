@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
   def index
-    render_ok(Issue.all)
+    @q = Issue.ransack(params[:q])
+    render_ok(@q.result)
   end
 
   def create
