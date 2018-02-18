@@ -15,3 +15,4 @@ User.create(name: 'hsuzuki', email: 'hsuzuki@example.com')
 
 Assignment.create(issue_id: 1, user_id: 1)
 Assignment.create(issue_id: 2, user_id: 1)
+Assignment.create(issue_id: 2, user_id: 2)
