@@ -9,7 +9,7 @@ RSpec.describe AssignmentsController, type: :controller do
     it { expect(subject).to have_http_status :bad_request }
   end
 
-  describe "#index" do
+  describe '#index' do
     let!(:issue) { create(:issue) }
     let!(:user) { create(:user) }
     let!(:assignment) { create(:assignment, user_id: user.id, issue_id: issue.id) }
@@ -20,8 +20,8 @@ RSpec.describe AssignmentsController, type: :controller do
     it { expect(JSON.parse(subject.body)['payload'].map { |d| d['issue']['id'] }).to include issue.id }
   end
 
-  describe "#create" do
-    context "ok" do
+  describe '#create' do
+    context 'ok' do
       let!(:issue) { create(:issue) }
       let!(:user) { create(:user) }
       subject { post :create, params: { assignment: { user_id: user.id, issue_id: issue.id } } }
@@ -32,13 +32,13 @@ RSpec.describe AssignmentsController, type: :controller do
         expect(JSON.parse(get(:index).body)['payload'].map { |d| d['user']['id'] }).to include user.id
       end
     end
-    context "ng" do
+    context 'ng' do
       let!(:issue) { create(:issue) }
       let!(:user) { create(:user) }
       subject { post :create, params: { assignment: { user_id: user.id, issue_id: nil } } }
       it_behaves_like 'status_is_bad_request'
       it do
-        expect(JSON.parse(subject.body)['status']).to eq "ng"
+        expect(JSON.parse(subject.body)['status']).to eq 'ng'
         expect(JSON.parse(subject.body)['error_code']).to eq 400
         expect(JSON.parse(subject.body)['message']).to_not be_empty
         expect(JSON.parse(get(:index).body)['payload'].map { |d| d['user']['id'] }).to_not include user.id
@@ -46,7 +46,7 @@ RSpec.describe AssignmentsController, type: :controller do
     end
   end
 
-  describe "#destroy" do
+  describe '#destroy' do
     let!(:issue) { create(:issue) }
     let!(:user) { create(:user) }
     let!(:assignment) { create(:assignment, user_id: user.id, issue_id: issue.id) }

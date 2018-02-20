@@ -8,10 +8,10 @@ class Assignment < ApplicationRecord
   private
 
   def user_must_exists
-    errors.add(:user_id, "must exists") if user.nil? || user.deleted?
+    errors.add(:user_id, 'must exists') if user.nil? || user.deleted?
   end
 
   def issue_must_exists
-    errors.add(:issue_id, "must exists") if issue.nil? || issue.deleted?
+    errors.add(:issue_id, 'must exists') if issue.nil? || issue.deleted?
   end
 end

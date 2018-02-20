@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Assignment, type: :model do
-  describe "validation ok" do
+  describe 'validation ok' do
     let!(:issue) { create(:issue) }
     let!(:user) { create(:user) }
     it { expect(build(:assignment, user_id: user.id, issue_id: issue.id)).to be_valid }
   end
-  describe "validation ng" do
-    context "when not unique" do
+  describe 'validation ng' do
+    context 'when not unique' do
       let!(:issue) { create(:issue) }
       let!(:user) { create(:user) }
       it do
@@ -19,7 +19,21 @@ RSpec.describe Assignment, type: :model do
         expect { build(:assignment, user_id: user.id, issue_id: issue.id).save!(validate: false) }.to raise_error ActiveRecord::RecordNotUnique
       end
     end
-    context "when invalid id" do
+    context 'when refer to soft deleted issue' do
+      let!(:issue) { create(:issue).destroy }
+      let!(:user) { create(:user) }
+      it do
+        expect(build(:assignment, user_id: user.id, issue_id: issue.id)).to_not be_valid
+      end
+    end
+    context 'when refer to soft deleted user' do
+      let!(:issue) { create(:issue) }
+      let!(:user) { create(:user).destroy }
+      it do
+        expect(build(:assignment, user_id: user.id, issue_id: issue.id)).to_not be_valid
+      end
+    end
+    context 'when invalid id' do
       let!(:issue) { create(:issue) }
       let!(:user) { create(:user) }
       it { expect(build(:assignment, user_id: user.id + 1, issue_id: issue.id)).to_not be_valid }
