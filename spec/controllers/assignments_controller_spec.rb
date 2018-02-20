@@ -24,7 +24,7 @@ RSpec.describe AssignmentsController, type: :controller do
     context "ok" do
       let!(:issue) { create(:issue) }
       let!(:user) { create(:user) }
-      subject { post :create, params: { user_id: user.id, issue_id: issue.id } }
+      subject { post :create, params: { assignment: { user_id: user.id, issue_id: issue.id } } }
       it_behaves_like 'status_is_ok'
       it do
         expect(JSON.parse(subject.body)['payload']['user_id']).to eq user.id
@@ -35,7 +35,7 @@ RSpec.describe AssignmentsController, type: :controller do
     context "ng" do
       let!(:issue) { create(:issue) }
       let!(:user) { create(:user) }
-      subject { post :create, params: { user_id: user.id, issue_id: nil } }
+      subject { post :create, params: { assignment: { user_id: user.id, issue_id: nil } } }
       it_behaves_like 'status_is_bad_request'
       it do
         expect(JSON.parse(subject.body)['status']).to eq "ng"

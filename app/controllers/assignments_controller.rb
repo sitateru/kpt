@@ -4,7 +4,7 @@ class AssignmentsController < ApplicationController
   end
 
   def create
-    assignment = Assignment.new(issue_id: params[:issue_id], user_id: params[:user_id])
+    assignment = Assignment.new(assignment_params)
     if assignment.save
       render_ok(assignment)
     else
@@ -16,5 +16,11 @@ class AssignmentsController < ApplicationController
     assignment = Assignment.find(params[:id])
     assignment.destroy
     render_ok(assignment)
+  end
+
+  private
+
+  def assignment_params
+    params.require(:assignment).permit(:issue_id, :user_id)
   end
 end

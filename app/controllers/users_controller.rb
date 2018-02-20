@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   def index
-    render_ok(User.all)
+    render_ok(JSON.parse(User.all.includes(:issues).to_json(include: :issues)))
   end
 
   def show
     user = User.find(params[:id])
-    render_ok(user)
+    render_ok(JSON.parse(user.to_json(include: :issues)))
   end
 
   def create
