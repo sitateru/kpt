@@ -14,6 +14,21 @@ KPT用のApplicaitonを作成するためのWebAPI
 
 - KPTはIssueモデルとして扱い、Keep, Problem, Statusをstatusとして持つ
 
+## Getting Start(for MacOS)
+
+- `$ brew update`
+- `$ brew install postgresql`
+- `$ brew install ruby-build`
+
+
+- `$ rbenv install ${RUBY_VERSION}`
+- `$ cd ${this_repo}`
+- `$ gem install bundler foreman`
+- `$ foreman start`
+- `$ rails db:create db:migrate`
+
+localhost:8000 にアクセス
+
 
 ## 参考資料
 
@@ -22,6 +37,7 @@ KPT用のApplicaitonを作成するためのWebAPI
 - https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
 - https://qiita.com/_daisuke/items/13996621cf51f835494b
 - http://www.rubydoc.info/gems/factory_girl/file/GETTING_STARTED.md
+
 
 ## カバレッジ
 
