@@ -24,6 +24,7 @@ KPT用のApplicaitonを作成するためのWebAPI
 - `$ rbenv install ${RUBY_VERSION}`
 - `$ cd ${this_repo}`
 - `$ gem install bundler foreman`
+- `$ bundle install` 
 - `$ foreman start`
 - `$ rails db:create db:migrate`
 
