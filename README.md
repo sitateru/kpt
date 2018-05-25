@@ -30,6 +30,17 @@ KPT用のApplicaitonを作成するためのWebAPI
 
 localhost:8000 にアクセス
 
+## Getting Start(for Docker)
+
+- install Docker for Mac https://docs.docker.com/docker-for-mac/install/
+
+- `$ cd ${this_repo}`
+- `$ docker-compose build`
+- `$ docker-compose up -d`
+- `$ docker ps`
+- `$ docker-compose run web rake db:create db:migrate`
+
+localhost:8000 にアクセス
 
 ## 参考資料
 
