@@ -1,0 +1,17 @@
+FROM ruby:2.5.1-alpine3.7
+
+ENV BUNDLE_SILENCE_ROOT_WARNING=1
+
+RUN apk update && \
+  apk add --no-cache libstdc++ git postgresql-dev tzdata
+
+RUN mkdir /myapp
+WORKDIR /myapp
+COPY Gemfile /myapp/Gemfile
+COPY Gemfile.lock /myapp/Gemfile.lock
+
+RUN set -ex && \
+  apk add --no-cache --virtual .ruby-bundler build-base && \
+  bundle install --no-cache
+
+COPY . /myapp
