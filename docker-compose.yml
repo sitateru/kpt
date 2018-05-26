@@ -8,7 +8,7 @@ services:
       - ./tmp/db:/var/lib/postgresql/data:z
   web:
     build: .
-    command: bundle exec rails s -p 8000 -b '0.0.0.0'
+    command: bash -c "echo 'DB_HOST=${DB_HOST}' && bundle exec rails s -p 8000 -b '0.0.0.0'"
     volumes:
       - .:/myapp:z
     ports:
@@ -16,4 +16,4 @@ services:
     depends_on:
       - db
     environment:
-      DB_HOST: db
+      DB_HOST: $DB_HOST
