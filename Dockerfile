@@ -10,7 +10,7 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 
 RUN set -ex && \
   apk update && \
-  apk add --no-cache libstdc++ postgresql-dev tzdata build-base && \
+  apk add --no-cache libstdc++ postgresql-dev tzdata build-base bash && \
   bundle install --no-cache && \
   apk del build-base
 
