@@ -32,10 +32,14 @@ localhost:8000 にアクセス
 
 ## Getting Start(for Docker)
 
-- install Docker for Mac https://docs.docker.com/docker-for-mac/install/
-
 - `$ cd ${this_repo}`
 - `$ docker-compose build`
+- .envファイルにDBのendpointを記入。DB用コンテナに接続する場合は`DB_HOST=db`。
+
+  ```
+  DB_HOST=172.17.0.1 
+  ```
+
 - `$ docker-compose up -d`
 - `$ docker ps`
 - `$ docker-compose run web rake db:create db:migrate`
