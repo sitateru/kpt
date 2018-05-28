@@ -30,6 +30,24 @@ KPT用のApplicaitonを作成するためのWebAPI
 
 localhost:8000 にアクセス
 
+## Getting Start(for Docker)
+
+- `$ cd ${this_repo}`
+- `$ docker-compose build`
+- .envファイルにDBのendpointを記入。
+
+  ```
+  DB_HOST=172.17.0.1 
+  ```
+
+- db用コンテナを使用する場合
+ - .envに`DB_HOST=db`を記入。
+ - `$ mkdir -p tmp/db`を実行。(ホストのマウントポイント)
+- `$ docker-compose up -d`
+- `$ docker ps`
+- `$ docker-compose run web rake db:create db:migrate`
+
+localhost:8000 にアクセス
 
 ## 参考資料
 
