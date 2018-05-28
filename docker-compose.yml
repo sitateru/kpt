@@ -1,0 +1,19 @@
+version: '2'
+services:
+  db:
+    image: postgres:10.4-alpine
+    ports:
+      - "5432"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data:z
+  web:
+    build: .
+    command: bash -c "echo 'DB_HOST=${DB_HOST}' && bundle exec rails s -p 8000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp:z
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: $DB_HOST
