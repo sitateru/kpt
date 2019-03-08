@@ -14,7 +14,7 @@ KPT用のApplicaitonを作成するためのWebAPI
 
 - KPTはIssueモデルとして扱い、Keep, Problem, Statusをstatusとして持つ
 
-## Getting Start(for MacOS)
+## Getting Started(for MacOS)
 
 - `$ brew update`
 - `$ brew install postgresql`
