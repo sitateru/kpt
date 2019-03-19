@@ -1,6 +1,6 @@
 # 概要
 
-KPT用のApplicaitonを作成するためのWebAPI
+KPT用のApplicationを作成するためのWebAPI
 
 
 ## 開発フロー
@@ -30,7 +30,7 @@ KPT用のApplicaitonを作成するためのWebAPI
 
 localhost:8000 にアクセス
 
-## Getting Start(for Docker)
+## Getting Started(for Docker)
 
 - `$ cd ${this_repo}`
 - `$ docker-compose build`
