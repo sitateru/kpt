@@ -8,7 +8,7 @@ jobs:
       - run: <command>
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: circleci/ruby:2.3-jessie
     steps:
       - checkout
       - run: <command>
