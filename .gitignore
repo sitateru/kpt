@@ -21,3 +21,6 @@
 
 # Ignore simplecov coverage directory
 /coverage
+
+#Ignore the .idea folder
+/.idea/*
