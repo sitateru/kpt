@@ -6,6 +6,7 @@ class Issue < ApplicationRecord
   validates :title, presence: true
 
   enum status: { keep: 0, problem: 1, try: 2 }
+  enum tag: { hurry: 0, important: 1, regular: 2, low: 3 }
   # be able to search with string
   ransacker :status, formatter: proc { |v| statuses[v] }
 end
