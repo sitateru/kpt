@@ -28,6 +28,26 @@ class IssuesController < ApplicationController
     render_ok(issue)
   end
 
+  def open
+    issue = Issue.find(params[:id])
+    issue.is_close = false
+    if issue.save
+      render_ok(issue)
+    else
+      render_ng(400, issue.errors)
+    end
+  end
+
+  def close
+    issue = Issue.find(params[:id])
+    issue.is_close = true
+    if issue.save
+      render_ok(issue)
+    else
+      render_ng(400, issue.errors)
+    end
+  end
+
   private
 
   def issue_params
