@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20190508234320) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.boolean "is_close", default: false, null: false
+    t.boolean "is_closed", default: false, null: false
     t.index ["deleted_at"], name: "index_issues_on_deleted_at"
   end
 
