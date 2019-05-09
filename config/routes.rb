@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   resources :issues do
     member do
-      post :open
-      post :close
+      patch :open
+      patch :close
     end
   end
 
