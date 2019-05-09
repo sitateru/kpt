@@ -30,7 +30,7 @@ class IssuesController < ApplicationController
 
   def open
     issue = Issue.find(params[:id])
-    issue.is_close = false
+    issue.is_closed = false
     if issue.save
       render_ok(issue)
     else
@@ -40,7 +40,7 @@ class IssuesController < ApplicationController
 
   def close
     issue = Issue.find(params[:id])
-    issue.is_close = true
+    issue.is_closed = true
     if issue.save
       render_ok(issue)
     else
