@@ -75,15 +75,15 @@ RSpec.describe IssuesController, type: :controller do
 
   describe '#open' do
     let(:issue) { FactoryGirl.create(:issue) }
-    subject { post :open, params: { id: issue } }
+    subject { patch :open, params: { id: issue } }
     it { expect(subject.status).to eq 200 }
-    it { expect(JSON.parse(subject.body)['payload']['is_close']).to eq false }
+    it { expect(JSON.parse(subject.body)['payload']['is_closed']).to eq false }
   end
 
   describe '#close' do
     let(:issue) { FactoryGirl.create(:issue) }
-    subject { post :close, params: { id: issue } }
+    subject { patch :close, params: { id: issue } }
     it { expect(subject.status).to eq 200 }
-    it { expect(JSON.parse(subject.body)['payload']['is_close']).to eq true }
+    it { expect(JSON.parse(subject.body)['payload']['is_closed']).to eq true }
   end
 end
