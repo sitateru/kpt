@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails_helper'
 
 RSpec.describe IssuesController, type: :controller do
@@ -70,5 +71,19 @@ RSpec.describe IssuesController, type: :controller do
     let(:issue) { delete :destroy, params: { id: issue_attrs } }
     subject { get :index }
     it { expect(JSON.parse(subject.body)['payload'].map { |d| d['id'] }).not_to include issue_attrs[:id] }
+  end
+
+  describe '#open' do
+    let(:issue) { FactoryGirl.create(:issue) }
+    subject { patch :open, params: { id: issue } }
+    it { expect(subject.status).to eq 200 }
+    it { expect(JSON.parse(subject.body)['payload']['is_closed']).to eq false }
+  end
+
+  describe '#close' do
+    let(:issue) { FactoryGirl.create(:issue) }
+    subject { patch :close, params: { id: issue } }
+    it { expect(subject.status).to eq 200 }
+    it { expect(JSON.parse(subject.body)['payload']['is_closed']).to eq true }
   end
 end
