@@ -51,5 +51,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :test do
   gem 'simplecov', '~> 0.14.1', :require => false
   gem 'coveralls', :require => false
+  gem "rspec_junit_formatter"
 end
 gem 'rubocop', require: false
