@@ -1,4 +1,3 @@
-# coding: utf-8
 FactoryBot.define do
   factory :issue do
     title { "問題のタイトル" }
