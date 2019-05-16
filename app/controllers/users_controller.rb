@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    if user.update_attributes(user_params)
+    if user.update(user_params)
       render_ok(user)
     else
       render_ng(400, user.errors)
