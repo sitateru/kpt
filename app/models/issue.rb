@@ -1,6 +1,6 @@
 class Issue < ApplicationRecord
   acts_as_paranoid
-  has_many :assignments, dependent: :destroy
+  has_many :assignments # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :users, through: :assignments
 
   validates :title, presence: true
