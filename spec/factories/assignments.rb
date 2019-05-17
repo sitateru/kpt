@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :assignment do
-    issue nil
-    user nil
+    issue { nil }
+    user { nil }
   end
 end
