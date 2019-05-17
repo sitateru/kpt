@@ -78,12 +78,30 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#destroy' do
-    let!(:user) { create(:user) }
-    subject { delete :destroy, params: { id: user.id } }
-    it_behaves_like 'status_is_ok'
-    it do
-      expect(JSON.parse(subject.body)['payload']['id']).to eq user.id
-      expect(JSON.parse(get(:index).body)['payload'].map { |d| d['id'] }).to_not include user.id
+    context 'ok' do
+      let!(:user) { create(:user) }
+      let!(:issue) { create(:issue, is_closed: true) }
+      let!(:assignment) { create(:assignment, user: user, issue: issue) }
+      subject { delete :destroy, params: { id: user.id } }
+      it_behaves_like 'status_is_ok'
+      it do
+        expect(JSON.parse(subject.body)['payload']['id']).to eq user.id
+        expect(JSON.parse(get(:index).body)['payload'].map { |d| d['id'] }).to_not include user.id
+      end
+    end
+
+    context 'ng' do
+      let!(:user) { create(:user) }
+      let!(:issue) { create(:issue, is_closed: false) }
+      let!(:assignment) { create(:assignment, user: user, issue: issue) }
+      subject { delete :destroy, params: { id: user.id } }
+      it_behaves_like 'status_is_bad_request'
+      it do
+        expect(JSON.parse(subject.body)['status']).to eq 'ng'
+        expect(JSON.parse(subject.body)['error_code']).to eq 400
+        expect(JSON.parse(subject.body)['message']).to_not be_empty
+        expect(JSON.parse(get(:show, params: { id: user.id }).body)['payload']['name']).to eq user.name
+      end
     end
   end
 end
