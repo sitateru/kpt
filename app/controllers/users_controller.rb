@@ -28,8 +28,11 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    user.destroy
-    render_ok(user)
+    if user.destroy
+      render_ok(user)
+    else
+      render_ng(400, user.errors)
+    end
   end
 
   private
