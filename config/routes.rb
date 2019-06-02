@@ -10,4 +10,5 @@ Rails.application.routes.draw do
 
   resources :assignments, only: [:index, :create, :destroy]
   resources :users
+  resources :groups
 end
