@@ -47,4 +47,12 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  context 'relation user and group' do
+    let(:user) { create(:user) }
+    let(:group) { create(:group) }
+
+    subject { user.tap { |user| user.group_ids = [group.id] }.group_ids }
+    it { is_expected.to match_array([group.id]) }
+  end
 end
