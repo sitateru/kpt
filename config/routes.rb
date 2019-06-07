@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   end
 
   resources :assignments, only: [:index, :create, :destroy]
-  resources :users
-  resources :groups
+  resources :users do
+    resource :groups, controller: 'user_groups', only: [:show, :update]
+  end
+  resources :groups do
+    resource :users, controller: 'group_users', only: [:show, :update]
+  end
 end
