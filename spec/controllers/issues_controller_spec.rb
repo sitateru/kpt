@@ -12,7 +12,8 @@ RSpec.describe IssuesController, type: :controller do
 
   describe '#index' do
     context 'default' do
-      let!(:issue) { create :issue }
+      let!(:tag) { create :tag }
+      let!(:issue) { create(:issue).tap { |issue| issue.tag_ids = [tag.id] } }
       let!(:user) { create :user }
       let!(:user_deleted) { create(:user, name: 'deleted_user') }
       let!(:assignment) { create(:assignment, user_id: user.id, issue_id: issue.id) }
@@ -23,6 +24,7 @@ RSpec.describe IssuesController, type: :controller do
       it { expect(JSON.parse(subject.body)['payload'].map { |d| d['id'] }).to include issue.id }
       it { expect(JSON.parse(subject.body)['payload'].select { |d| d['id'] == issue.id }[0]['users'][0]['id']).to eq user.id }
       it { expect(JSON.parse(subject.body)['payload'].select { |d| d['id'] == issue.id }[0]['users'][1]['id']).to eq user_deleted.id }
+      it { expect(JSON.parse(subject.body)['payload'].select { |d| d['id'] == issue.id }[0]['tags'][0]['id']).to eq tag.id }
     end
     context 'filter by status' do
       let!(:issues_searched) { create_list :issue, 10, title: 'the string to be searched', status: :keep }
