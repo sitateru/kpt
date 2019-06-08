@@ -5,6 +5,8 @@ class CreateIssueTags < ActiveRecord::Migration[5.1]
       t.references :tag, foreign_key: true
 
       t.timestamps
+
+      t.index [:issue_id, :tag_id], unique: true
     end
   end
 end
