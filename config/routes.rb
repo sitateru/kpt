@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       patch :open
       patch :close
     end
+    resource :tags, controller: 'issue_tags', only: [:show, :update]
   end
 
   resources :assignments, only: [:index, :create, :destroy]
