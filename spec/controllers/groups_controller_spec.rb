@@ -142,7 +142,7 @@ RSpec.describe GroupsController, type: :controller do
   end
 
   describe '#update' do
-    context 'when the specified user exists' do
+    context 'when the specified group exists' do
       let(:user) { create(:user) }
       let(:substitute_user) { create(:user) }
       let(:group) { create(:group).tap { |group| group.user_ids = [user.id] } }
@@ -193,7 +193,7 @@ RSpec.describe GroupsController, type: :controller do
       end
     end
 
-    context 'when the specified user does not exists' do
+    context 'when the specified group does not exists' do
       subject(:response) { put :update, params: { id: 9999 } }
 
       it_behaves_like 'return_not_found_response'
@@ -201,7 +201,7 @@ RSpec.describe GroupsController, type: :controller do
   end
 
   describe '#destroy' do
-    context 'when specified user exists' do
+    context 'when specified group exists' do
       let(:user) { create(:user) }
       let(:group) { create(:group).tap { |group| group.user_ids = [user.id] } }
 
@@ -222,7 +222,7 @@ RSpec.describe GroupsController, type: :controller do
       end
     end
 
-    context 'when specified user does not exists' do
+    context 'when specified group does not exists' do
       subject(:response) { delete :destroy, params: { id: 9999 } }
 
       it_behaves_like 'return_not_found_response'
