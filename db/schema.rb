@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190508234320) do
+ActiveRecord::Schema.define(version: 20190608163414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20190508234320) do
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
+  create_table "issue_tags", force: :cascade do |t|
+    t.bigint "issue_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issue_id", "tag_id"], name: "index_issue_tags_on_issue_id_and_tag_id", unique: true
+    t.index ["issue_id"], name: "index_issue_tags_on_issue_id"
+    t.index ["tag_id"], name: "index_issue_tags_on_tag_id"
+  end
+
   create_table "issues", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -34,6 +44,12 @@ ActiveRecord::Schema.define(version: 20190508234320) do
     t.datetime "deleted_at"
     t.boolean "is_closed", default: false, null: false
     t.index ["deleted_at"], name: "index_issues_on_deleted_at"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,4 +64,6 @@ ActiveRecord::Schema.define(version: 20190508234320) do
 
   add_foreign_key "assignments", "issues"
   add_foreign_key "assignments", "users"
+  add_foreign_key "issue_tags", "issues"
+  add_foreign_key "issue_tags", "tags"
 end
