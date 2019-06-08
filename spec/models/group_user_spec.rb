@@ -21,7 +21,7 @@ RSpec.describe GroupUser, type: :model do
 
     context 'create model instance and save' do
       let(:group_user) do
-        build(:group_user, user_id: user.id, group_id: group.id).save!(validate: false)
+        build(:group_user, user_id: user.id, group_id: group.id)
       end
 
       it { expect { group_user.save!(validate: false) }.to raise_error ActiveRecord::RecordNotUnique }
