@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   end
 
   resources :assignments, only: [:index, :create, :destroy]
+  resources :tags
   resources :users
 end
