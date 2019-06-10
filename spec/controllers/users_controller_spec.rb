@@ -9,7 +9,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#index' do
-    let!(:user) { create(:user) }
+    let!(:group) { create(:group) }
+    let!(:user) { create(:user).tap { |user| user.group_ids = [group.id] } }
     let!(:issue) { create(:issue) }
     let!(:issue_deleted) { create(:issue) }
     let!(:assignment) { create(:assignment, user_id: user.id, issue_id: issue.id) }
@@ -20,12 +21,16 @@ RSpec.describe UsersController, type: :controller do
     it { expect(JSON.parse(subject.body)['payload'].map { |d| d['id'] }).to include user.id }
     it { expect(JSON.parse(subject.body)['payload'].select { |d| d['id'] == user.id }[0]['issues'][0]['id']).to eq issue.id }
     it { expect(JSON.parse(subject.body)['payload'].select { |d| d['id'] == user.id }[0]['issues'][1]['id']).to eq issue_deleted.id }
+    it { expect(JSON.parse(subject.body)['payload'].select { |d| d['id'] == user.id }[0]['groups'][0]['id']).to eq group.id }
   end
+
   describe '#show' do
-    let!(:user) { create(:user) }
+    let!(:group) { create(:group) }
+    let!(:user) { create(:user).tap { |user| user.group_ids = [group.id] } }
     subject { get :show, params: { id: user.id } }
     it_behaves_like 'status_is_ok'
     it { expect(JSON.parse(subject.body)['payload']['id']).to eq user.id }
+    it { expect(JSON.parse(subject.body)['payload']['groups'][0]['id']).to eq group.id }
   end
 
   describe '#create' do
@@ -36,6 +41,7 @@ RSpec.describe UsersController, type: :controller do
       it do
         expect(JSON.parse(subject.body)['payload']['name']).to eq user_attrs[:name]
         expect(JSON.parse(get(:index).body)['payload'].map { |d| d['name'] }).to include user_attrs[:name]
+        expect(JSON.parse(subject.body)['payload']['groups']).to be_a Array
       end
     end
     context 'ng' do
