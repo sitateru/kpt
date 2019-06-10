@@ -5,6 +5,8 @@ class User < ApplicationRecord
   acts_as_paranoid
   has_many :assignments # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :issues, through: :assignments
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users
 
   validates :name, presence: true, uniqueness: { scope: :deleted_at }
   # not strictly

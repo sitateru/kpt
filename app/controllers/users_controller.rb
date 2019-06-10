@@ -1,17 +1,17 @@
 class UsersController < ApplicationController
   def index
-    render_ok(JSON.parse(User.all.includes(:issues).to_json(include: :issues)))
+    render_ok(JSON.parse(User.all.includes([:issues, :groups]).to_json(include: [:issues, :groups])))
   end
 
   def show
     user = User.find(params[:id])
-    render_ok(JSON.parse(user.to_json(include: :issues)))
+    render_ok(JSON.parse(user.to_json(include: [:issues, :groups])))
   end
 
   def create
     user = User.new(user_params)
     if user.save
-      render_ok(user)
+      render_ok(JSON.parse(user.to_json(include: :groups)))
     else
       render_ng(400, user.errors)
     end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     if user.update(user_params)
-      render_ok(user)
+      render_ok(JSON.parse(user.to_json(include: :groups)))
     else
       render_ng(400, user.errors)
     end

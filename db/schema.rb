@@ -25,6 +25,22 @@ ActiveRecord::Schema.define(version: 20190608163414) do
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
+  create_table "group_users", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id", "user_id"], name: "index_group_users_on_group_id_and_user_id", unique: true
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "issue_tags", force: :cascade do |t|
     t.bigint "issue_id", null: false
     t.bigint "tag_id", null: false
@@ -64,6 +80,8 @@ ActiveRecord::Schema.define(version: 20190608163414) do
 
   add_foreign_key "assignments", "issues"
   add_foreign_key "assignments", "users"
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
   add_foreign_key "issue_tags", "issues"
   add_foreign_key "issue_tags", "tags"
 end
