@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
   def index
     @r = Issue.ransack(params[:q]).result
-    render_ok(JSON.parse(@r.includes(:users).to_json(include: :users)))
+    render_ok(JSON.parse(@r.includes(:users, :tags).to_json(include: [:users, :tags])))
   end
 
   def create

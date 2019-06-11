@@ -20,3 +20,6 @@ Assignment.create(issue_id: 2, user_id: 2)
 Group.create(name: 'developers')
 Group.create(name: 'operators')
 Group.create(name: 'testers')
+
+Tag.create(name: '急ぎ')
+Tag.create(name: '重要')
