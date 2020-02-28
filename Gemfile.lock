@@ -89,7 +89,7 @@ GEM
     polyamorous (1.3.3)
       activerecord (>= 3.0)
     powerpack (0.1.1)
-    puma (3.11.4)
+    puma (3.12.3)
     rack (2.0.5)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
@@ -194,7 +194,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   paranoia (~> 2.2)
   pg
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.1.4)
   ransack (~> 1.8.7)
   rspec-rails (~> 3.6)
